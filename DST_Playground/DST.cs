@@ -260,7 +260,7 @@ namespace DST_Playground
             int month = date.Month;
             DateTime transitionDate = GetNextTransition(date, tzId) ?? DateTime.MinValue;
             bool isTransitionDate = transitionDate != DateTime.MinValue && transitionDate.Date == date.Date ? true : false;
-
+             
             // March at the last sunday time is moved with one hour forward 
             // that means the day will actually have 23 hours 
 

@@ -1,0 +1,6 @@
+E:\projects\DST_Playground\DST_Playground\DST_Playground\bin\Debug\DST_Playground.exe.config
+E:\projects\DST_Playground\DST_Playground\DST_Playground\bin\Debug\DST_Playground.exe
+E:\projects\DST_Playground\DST_Playground\DST_Playground\bin\Debug\DST_Playground.pdb
+E:\projects\DST_Playground\DST_Playground\DST_Playground\obj\Debug\DST_Playground.csprojResolveAssemblyReference.cache
+E:\projects\DST_Playground\DST_Playground\DST_Playground\obj\Debug\DST_Playground.exe
+E:\projects\DST_Playground\DST_Playground\DST_Playground\obj\Debug\DST_Playground.pdb

@@ -1,0 +1,6 @@
+E:\projects\ConsoleAppPlayground\ConsoleAppPlayground\ConsoleAppPlayground\bin\Debug\ConsoleAppPlayground.exe.config
+E:\projects\ConsoleAppPlayground\ConsoleAppPlayground\ConsoleAppPlayground\bin\Debug\ConsoleAppPlayground.exe
+E:\projects\ConsoleAppPlayground\ConsoleAppPlayground\ConsoleAppPlayground\bin\Debug\ConsoleAppPlayground.pdb
+E:\projects\ConsoleAppPlayground\ConsoleAppPlayground\ConsoleAppPlayground\obj\Debug\ConsoleAppPlayground.csprojResolveAssemblyReference.cache
+E:\projects\ConsoleAppPlayground\ConsoleAppPlayground\ConsoleAppPlayground\obj\Debug\ConsoleAppPlayground.exe
+E:\projects\ConsoleAppPlayground\ConsoleAppPlayground\ConsoleAppPlayground\obj\Debug\ConsoleAppPlayground.pdb

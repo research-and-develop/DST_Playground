@@ -10,6 +10,13 @@ namespace DST_Playground
 {
     public class DST
     {
+        const string CEST_ID = "Central Europe Standard Time";
+
+        /// <summary>
+        /// Write info text in the console about time transition dates 
+        /// for all system time zones
+        /// </summary>
+        /// <param name="year"></param>
         public static void ConsoleTransitionTimes(int year)
         {
             // Instantiate DateTimeFormatInfo object for month names
@@ -115,6 +122,12 @@ namespace DST_Playground
                               transition.TimeOfDay);
         }
 
+        /// <summary>
+        /// Gives you a DateTime object representing TransitionTime object
+        /// </summary>
+        /// <param name="transitionTime">TimeZoneInfo.TransitionTime object representing a transition time date</param>
+        /// <param name="year">transition time date's year</param>
+        /// <returns>DateTime object representing given TransitionTime object</returns>
         public static DateTime GetAdjustmentDate(TimeZoneInfo.TransitionTime transitionTime, int year)
         {
             if (transitionTime.IsFixedDateRule)
@@ -147,6 +160,14 @@ namespace DST_Playground
             }
         }
 
+        /// <summary>
+        /// Returns next time transition date from given date. If date equeals a time transition date it is returned then.
+        /// For example for 2017 March change date is 26 March 2017 CEST and result of GetNextTransition(new DateTime(2017, 3, 26), "Central Europe Standard Time")
+        /// will be DateTime object for date 26 March 2017
+        /// </summary>
+        /// <param name="asOfTime">Date starting the check from</param>
+        /// <param name="timeZone">Timezone agains the check is made</param>
+        /// <returns>DateTime object representing the first date after asOfTime date that is a time transition date or NULL if no time transition in this timeZone</returns>
         public static DateTime? GetNextTransition(DateTime asOfTime, TimeZoneInfo timeZone)
         {
             TimeZoneInfo.AdjustmentRule[] adjustments = timeZone.GetAdjustmentRules();
@@ -179,12 +200,12 @@ namespace DST_Playground
             DateTime dtAdjustmentEnd = GetAdjustmentDate(adjustment.DaylightTransitionEnd, year);
 
 
-            if (dtAdjustmentStart >= asOfTime)
+            if (dtAdjustmentStart.Date >= asOfTime.Date)
             {
                 // if adjusment start date is greater than asOfTime date then this should be the next transition date
                 return dtAdjustmentStart;
             }
-            else if (dtAdjustmentEnd >= asOfTime)
+            else if (dtAdjustmentEnd.Date >= asOfTime.Date)
             {
                 // otherwise adjustment end date should be the next transition date
                 return dtAdjustmentEnd;
@@ -209,6 +230,14 @@ namespace DST_Playground
             }
         }
 
+        /// <summary>
+        /// Returns next time transition date from given date. If date equeals a time transition date it is returned then.
+        /// For example for 2017 March change date is 26 March 2017 CEST and result of GetNextTransition(new DateTime(2017, 3, 26), "Central Europe Standard Time")
+        /// will be DateTime object for date 26 March 2017
+        /// </summary>
+        /// <param name="asOfTime">Date starting the check from</param>
+        /// <param name="timeZone">Timezone agains the check is made</param>
+        /// <returns>DateTime object representing the first date after asOfTime date that is a time transition date or NULL if no time transition in this timeZone</returns>
         public static DateTime? GetNextTransition(DateTime asOfTime, string timeZone)
         {
             TimeZoneInfo timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById(timeZone);
@@ -216,6 +245,28 @@ namespace DST_Playground
                 return null;
 
             return GetNextTransition(asOfTime, timeZoneInfo);
+        }
+
+        /// <summary>
+        /// This function actually help to determine how many hours the day has.
+        /// in case of last sunday of march result should be 23 and 
+        /// in case of last sunday ofoctober result should be 25
+        /// </summary>
+        /// <param name="date">Date which hours count is checked</param>
+        /// <returns>hours of the given date</returns>
+        public static int GetDayHours(DateTime date, string timeZoneId)
+        {
+            string tzId = string.IsNullOrEmpty(timeZoneId) ? CEST_ID : timeZoneId;
+            int month = date.Month;
+            DateTime transitionDate = GetNextTransition(date, tzId) ?? DateTime.MinValue;
+            bool isTransitionDate = transitionDate != DateTime.MinValue && transitionDate.Date == date.Date ? true : false;
+
+            // March at the last sunday time is moved with one hour forward 
+            // that means the day will actually have 23 hours 
+
+            // October at the last sunday time is moved with one hour backward 
+            // that means the day will actually have 25 hours  
+            return isTransitionDate && month == 3 ? 23 : isTransitionDate && month == 10 ? 25 : 24;
         }
     }
 }
